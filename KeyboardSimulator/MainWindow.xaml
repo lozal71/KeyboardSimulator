@@ -1,0 +1,240 @@
+﻿<Window x:Class="KeyboardSimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KeyboardSimulator"
+        mc:Ignorable="d"
+        Title="Клавиатурный тренажер" MaxHeight="550" MaxWidth="770" MinHeight="550" MinWidth="770">
+    <Window.Resources>
+        <Style x:Key="BaseStyle">
+            <Setter Property="ItemsControl.FontSize" Value="16"/>
+            <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label" BasedOn="{StaticResource BaseStyle}">
+        </Style>
+        <Style x:Key="TextStyleBold" TargetType="TextBlock" BasedOn="{StaticResource BaseStyle}">
+            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="btnBaseStyle" TargetType="Button"
+               BasedOn="{StaticResource BaseStyle}">
+        </Style>
+        <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style x:Key="RedButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="Red"/>
+        </Style>
+        <Style x:Key="YellowButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="Yellow"/>
+        </Style>
+        <Style x:Key="GreenButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="Green"/>
+        </Style>
+        <Style x:Key="BlueButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="Blue"/>
+        </Style>
+        <Style x:Key="PurpleButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="Purple"/>
+        </Style>
+        <Style x:Key="GrayButtton" TargetType="Button" >
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="BaseGrid" ShowGridLines="True" 
+          FocusManager.FocusedElement="{Binding ElementName=WritePanel}">
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel x:Name="TopPanel" LastChildFill="True" >
+            <Label Content="Скорость" HorizontalAlignment="Right" 
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBlock x:Name="Speed" Text="0" HorizontalAlignment="Center"
+                        Style="{StaticResource TextStyleBold}"/>
+            <Label Content="символов/мин" HorizontalAlignment="Left" 
+                    Style="{StaticResource LabelStyle}"/>
+            <Label Content="Ошибок" HorizontalAlignment="Right"
+                    Style="{StaticResource LabelStyle}"/>
+            <TextBlock x:Name="Fails" Text="0" HorizontalAlignment="Center"
+                            Style="{StaticResource TextStyleBold}"/>
+            <CheckBox Content="Регистр" DockPanel.Dock="Right" Margin="20,0,20,0"
+                      Style="{StaticResource BaseStyle}"/>
+            <TextBlock x:Name="Difficulty" Text="0" DockPanel.Dock="Right"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource TextStyleBold}"/>
+            <Label Content="Сложность" HorizontalAlignment="Right" 
+                    Style="{StaticResource LabelStyle}"/>
+        </DockPanel>
+        <DockPanel x:Name="StartPanel" Grid.Row="1" LastChildFill="False">
+            <Button x:Name="btnStop" Content="Стоп" DockPanel.Dock="Right"
+                    Margin="5,5,5,5" Width="200" FontSize="16"/>
+            <Button x:Name="btnStart" Content="Старт" DockPanel.Dock="Right"
+                    Margin="5,5,5,5" Width="200" FontSize="16"/>
+        </DockPanel>
+        <DockPanel Grid.Row="2" MaxHeight="200">
+            <TextBlock x:Name="WritePanel"  Background="Lavender" FontSize="16"
+                       TextWrapping="Wrap" Focusable="True" 
+                       KeyDown="WritePanel_KeyDown"
+                       KeyUp="WritePanel_KeyUp"/>
+            <!--TextInput="WritePanel_TextInpt"/>-->
+        </DockPanel>
+        <Grid x:Name="ButtonSet"  Grid.Row="3" ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel  x:Name="Dock0"  Grid.Row="0" LastChildFill="True">
+                <Button x:Name="Oem3" Content="`"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D1" Content="1"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D2" Content="2"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D3" Content="3"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="D4" Content="4"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="D5" Content="5"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="D6" Content="6"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="D7" Content="7"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="D8" Content="8"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="D9" Content="9"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D0" Content="0"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="OemMinus" Content="-"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="OemPlus" Content="="
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="Back" Content="Backspace"
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel  x:Name="Dock1" Grid.Row="1" LastChildFill="True">
+                <Button x:Name="Oem5" Content="\" DockPanel.Dock="Right" Width="130"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="Oem6" Content="]" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="OemOpenBrackets" Content="[" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="P" Content="p" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="O" Content="o" DockPanel.Dock="Right"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="I" Content="i" DockPanel.Dock="Right"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="U" Content="u" DockPanel.Dock="Right"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="Y" Content="y" DockPanel.Dock="Right"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="T" Content="t" DockPanel.Dock="Right"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="R" Content="r" DockPanel.Dock="Right"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="E" Content="e" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="W" Content="w" DockPanel.Dock="Right"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="Q" Content="q" DockPanel.Dock="Right"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="Tab" Content="Tab" 
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel x:Name="Dock2" Grid.Row="2" LastChildFill="True">
+                <Button x:Name="Capital" Content="CapsLock"  DockPanel.Dock="Left" Width="90"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="A" Content="a" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="S" Content="s" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="D" Content="d" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="F" Content="f" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="G" Content="g" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="H" Content="h" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="J" Content="j" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="K" Content="k" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="L" Content="l" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="Oem1" Content=";" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="OemQuotes" Content="'" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="Return" Content="Enter"  DockPanel.Dock="Left"
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel x:Name="Dock3" Grid.Row="3" LastChildFill="True">
+                <Button x:Name="LeftShift" Content="Shift"  DockPanel.Dock="Left" Width="115"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="Z" Content="z" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="X" Content="x" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="C" Content="c" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="V" Content="v" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="B" Content="b" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="N" Content="n" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="M" Content="m" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="OemComma" Content="," DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="OemPeriod" Content="." DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="OemQuestion" Content="/" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="RightShift" Content="Shift"  DockPanel.Dock="Left"
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel x:Name="Dock4" Grid.Row="4" LastChildFill="True">
+                <Button x:Name="LeftCtrl" Content="Ctrl"  DockPanel.Dock="Left" 
+                        Width="57" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="LWin" Content="Win"  DockPanel.Dock="Left" 
+                        Width="80" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="LeftAlt" Content="Alt"  DockPanel.Dock="Left" 
+                        Width="80" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="RightCtrl" Content="Ctrl"  DockPanel.Dock="Right" 
+                        Width="57" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="Apps" Content="Apps"  DockPanel.Dock="Right" 
+                        Width="57" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="RWin" Content="Win"  DockPanel.Dock="Right" 
+                        Width="80" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="RightAlt" Content="Alt"  DockPanel.Dock="Right" 
+                        Width="80" Height="40"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="Space" Content="Space" 
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>
