@@ -28,21 +28,32 @@
         </Style>
         <Style x:Key="RedButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="Red"/>
+            <Setter Property="BorderBrush" Value="Red"/>
         </Style>
         <Style x:Key="YellowButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="BorderBrush" Value="Yellow"/>
         </Style>
         <Style x:Key="GreenButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="Green"/>
+            <Setter Property="BorderBrush" Value="Green"/>
         </Style>
         <Style x:Key="BlueButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="Blue"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
         </Style>
         <Style x:Key="PurpleButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
             <Setter Property="Background" Value="Purple"/>
+            <Setter Property="BorderBrush" Value="Purple"/>
         </Style>
         <Style x:Key="GrayButtton" TargetType="Button" >
             <Setter Property="Background" Value="Gray"/>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style x:Key="SpaceButtton" TargetType="Button" >
+            <Setter Property="Background" Value="Orange"/>
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Margin" Value="3"/>
@@ -54,7 +65,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DockPanel x:Name="TopPanel" LastChildFill="True" >
             <Label Content="Скорость" HorizontalAlignment="Right" 
@@ -81,12 +92,12 @@
             <Button x:Name="btnStart" Content="Старт" DockPanel.Dock="Right"
                     Margin="5,5,5,5" Width="200" FontSize="16"/>
         </DockPanel>
-        <DockPanel Grid.Row="2" MaxHeight="200">
-            <TextBlock x:Name="WritePanel"  Background="Lavender" FontSize="16"
+        <DockPanel Grid.Row="2" MaxHeight="100">
+            <TextBox x:Name="WritePanel"  Background="Lavender" FontSize="16"
                        TextWrapping="Wrap" Focusable="True" 
                        KeyDown="WritePanel_KeyDown"
-                       KeyUp="WritePanel_KeyUp"/>
-            <!--TextInput="WritePanel_TextInpt"/>-->
+                       KeyUp="WritePanel_KeyUp"
+                       TextInput="WritePanel_TextInpt"/>
         </DockPanel>
         <Grid x:Name="ButtonSet"  Grid.Row="3" ShowGridLines="True">
             <Grid.RowDefinitions>
@@ -153,7 +164,7 @@
                         Style="{StaticResource YellowButtton}"/>
                 <Button x:Name="Q" Content="q" DockPanel.Dock="Right"
                         Style="{StaticResource RedButtton}"/>
-                <Button x:Name="Tab" Content="Tab" 
+                <Button x:Name="Tab" Content="Tab" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
             </DockPanel>
             <DockPanel x:Name="Dock2" Grid.Row="2" LastChildFill="True">
@@ -212,28 +223,28 @@
             </DockPanel>
             <DockPanel x:Name="Dock4" Grid.Row="4" LastChildFill="True">
                 <Button x:Name="LeftCtrl" Content="Ctrl"  DockPanel.Dock="Left" 
-                        Width="57" Height="40"
+                        Width="57" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="LWin" Content="Win"  DockPanel.Dock="Left" 
-                        Width="80" Height="40"
+                        Width="80" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="LeftAlt" Content="Alt"  DockPanel.Dock="Left" 
-                        Width="80" Height="40"
+                        Width="80" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="RightCtrl" Content="Ctrl"  DockPanel.Dock="Right" 
-                        Width="57" Height="40"
+                        Width="57" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="Apps" Content="Apps"  DockPanel.Dock="Right" 
-                        Width="57" Height="40"
+                        Width="57" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="RWin" Content="Win"  DockPanel.Dock="Right" 
-                        Width="80" Height="40"
+                        Width="80" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="RightAlt" Content="Alt"  DockPanel.Dock="Right" 
-                        Width="80" Height="40"
+                        Width="80" Height="40" IsEnabled="False"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="Space" Content="Space" 
-                        Style="{StaticResource GrayButtton}"/>
+                        Style="{StaticResource SpaceButtton}"/>
             </DockPanel>
         </Grid>
     </Grid>
