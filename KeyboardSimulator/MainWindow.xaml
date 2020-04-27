@@ -50,12 +50,14 @@
             <Setter Property="Background" Value="Gray"/>
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="Margin" Value="3"/>
         </Style>
         <Style x:Key="SpaceButtton" TargetType="Button" >
             <Setter Property="Background" Value="Orange"/>
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Orange"/>
             <Setter Property="Margin" Value="3"/>
         </Style>
     </Window.Resources>
@@ -94,7 +96,7 @@
         </DockPanel>
         <DockPanel Grid.Row="2" MaxHeight="100">
             <TextBox x:Name="WritePanel"  Background="Lavender" FontSize="16"
-                       TextWrapping="Wrap" Focusable="True" 
+                       TextWrapping="Wrap" Focusable="True" AcceptsReturn="True" AcceptsTab="True"
                        KeyDown="WritePanel_KeyDown"
                        KeyUp="WritePanel_KeyUp"
                        TextInput="WritePanel_TextInpt"/>
@@ -107,7 +109,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <DockPanel  x:Name="Dock0"  Grid.Row="0" LastChildFill="True">
+            <DockPanel  x:Name="Dock0"  Grid.Row="0" LastChildFill="True" Visibility="Visible">
                 <Button x:Name="Oem3" Content="`"
                         Style="{StaticResource RedButtton}"/>
                 <Button x:Name="D1" Content="1"
@@ -137,7 +139,37 @@
                 <Button x:Name="Back" Content="Backspace"
                         Style="{StaticResource GrayButtton}"/>
             </DockPanel>
-            <DockPanel  x:Name="Dock1" Grid.Row="1" LastChildFill="True">
+            <DockPanel  x:Name="Dock00"  Grid.Row="0" LastChildFill="True" Visibility="Hidden">
+                <Button x:Name="Oem3_shift" Content="~"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D1_shift" Content="!"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D2_shift" Content="@"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D3_shift" Content="#"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="D4_shift" Content="$"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="D5_shift" Content="%"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="D6_shift" Content="^"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="D7_shift" Content="&amp;"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="D8_shift" Content="*"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="D9_shift" Content="("
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="D0_shift" Content=")"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="OemMinus_shift" Content="_"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="OemPlus_shift" Content="+"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="Back_shift" Content="Backspace"
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel  x:Name="Dock1" Grid.Row="1" LastChildFill="True" Visibility="Visible">
                 <Button x:Name="Oem5" Content="\" DockPanel.Dock="Right" Width="130"
                         Style="{StaticResource GreenButtton}"/>
                 <Button x:Name="Oem6" Content="]" DockPanel.Dock="Right"
@@ -164,10 +196,40 @@
                         Style="{StaticResource YellowButtton}"/>
                 <Button x:Name="Q" Content="q" DockPanel.Dock="Right"
                         Style="{StaticResource RedButtton}"/>
-                <Button x:Name="Tab" Content="Tab" IsEnabled="False"
+                <Button x:Name="Tab" Content="Tab" 
                         Style="{StaticResource GrayButtton}"/>
             </DockPanel>
-            <DockPanel x:Name="Dock2" Grid.Row="2" LastChildFill="True">
+            <DockPanel  x:Name="Dock11" Grid.Row="1" LastChildFill="True" Visibility="Hidden">
+                <Button x:Name="Oem5_shift" Content="|" DockPanel.Dock="Right" Width="130"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="Oem6_shift" Content="}" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="OemOpenBrackets_shift" Content="'{" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="P_shift" Content="P" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="O_shift" Content="O" DockPanel.Dock="Right"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="I_shift" Content="I" DockPanel.Dock="Right"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="U_shift" Content="U" DockPanel.Dock="Right"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="Y_shift" Content="Y" DockPanel.Dock="Right"
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="T_shift" Content="T" DockPanel.Dock="Right"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="R_shift" Content="R" DockPanel.Dock="Right"
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="E_shift" Content="E" DockPanel.Dock="Right"
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="W_shift" Content="W" DockPanel.Dock="Right"
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="Q_shift" Content="Q" DockPanel.Dock="Right"
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="Tab_shift" Content="Tab" 
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel x:Name="Dock2" Grid.Row="2" LastChildFill="True" Visibility="Visible">
                 <Button x:Name="Capital" Content="CapsLock"  DockPanel.Dock="Left" Width="90"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="A" Content="a" DockPanel.Dock="Left" 
@@ -195,7 +257,35 @@
                 <Button x:Name="Return" Content="Enter"  DockPanel.Dock="Left"
                         Style="{StaticResource GrayButtton}"/>
             </DockPanel>
-            <DockPanel x:Name="Dock3" Grid.Row="3" LastChildFill="True">
+            <DockPanel x:Name="Dock22" Grid.Row="2" LastChildFill="True" Visibility="Hidden">
+                <Button x:Name="Capital_shift" Content="CapsLock"  DockPanel.Dock="Left" Width="90"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="A_shift" Content="A" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="S_shift" Content="S" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="D_shift" Content="D" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="F_shift" Content="F" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="G_shift" Content="G" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="H_shift" Content="H" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="J_shift" Content="J" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="K_shift" Content="K" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="L_shift" Content="L" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="Oem1_shift" Content=":" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="OemQuotes_shift" Content="&quot;" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="Return_shift" Content="Enter"  DockPanel.Dock="Left"
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel x:Name="Dock3" Grid.Row="3" LastChildFill="True" Visibility="Visible">
                 <Button x:Name="LeftShift" Content="Shift"  DockPanel.Dock="Left" Width="115"
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="Z" Content="z" DockPanel.Dock="Left" 
@@ -219,6 +309,32 @@
                 <Button x:Name="OemQuestion" Content="/" DockPanel.Dock="Left" 
                         Style="{StaticResource GreenButtton}"/>
                 <Button x:Name="RightShift" Content="Shift"  DockPanel.Dock="Left"
+                        Style="{StaticResource GrayButtton}"/>
+            </DockPanel>
+            <DockPanel x:Name="Dock33" Grid.Row="3" LastChildFill="True" Visibility="Hidden">
+                <Button x:Name="LeftShift_shift" Content="Shift"  DockPanel.Dock="Left" Width="115"
+                        Style="{StaticResource GrayButtton}"/>
+                <Button x:Name="Z_shift" Content="Z" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="X_shift" Content="X" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="C_shift" Content="C" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="V_shift" Content="V" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="B_shift" Content="B" DockPanel.Dock="Left" 
+                        Style="{StaticResource BlueButtton}"/>
+                <Button x:Name="N_shift" Content="N" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="M_shift" Content="M" DockPanel.Dock="Left" 
+                        Style="{StaticResource PurpleButtton}"/>
+                <Button x:Name="OemComma_shift" Content="&lt;" DockPanel.Dock="Left" 
+                        Style="{StaticResource RedButtton}"/>
+                <Button x:Name="OemPeriod_shift" Content="&gt;" DockPanel.Dock="Left" 
+                        Style="{StaticResource YellowButtton}"/>
+                <Button x:Name="OemQuestion_shift" Content="?" DockPanel.Dock="Left" 
+                        Style="{StaticResource GreenButtton}"/>
+                <Button x:Name="RightShift_shift" Content="Shift"  DockPanel.Dock="Left"
                         Style="{StaticResource GrayButtton}"/>
             </DockPanel>
             <DockPanel x:Name="Dock4" Grid.Row="4" LastChildFill="True">
