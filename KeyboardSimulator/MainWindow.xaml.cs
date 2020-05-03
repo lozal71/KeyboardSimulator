@@ -18,32 +18,55 @@ namespace KeyboardSimulator
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public static class ResourceHelper
-    {
-        static public string FindNameFromResource(ResourceDictionary dictionary, object resourceItem)
-        {
-            foreach (object key in dictionary.Keys)
-            {
-                if (dictionary[key] == resourceItem)
-                {
-                    return key.ToString();
-                }
-            }
-
-            return null;
-        }
-    }
     public partial class MainWindow : Window
     {
-        public Brush tempColor;
-        //public bool flagRepeat = false;
-        //public bool flagTab = false;
-        //Button tempButton;
+        public struct ButtonDouble
+        {
+            public Button self;
+            public Button shift;
+        }
         public MainWindow()
         {
             InitializeComponent();
             if (Keyboard.IsKeyToggled(Key.CapsLock)) Switch_Big();
             else Switch_Small();
+        }
+        private ButtonDouble GetButtons(KeyEventArgs e)
+        {
+            ButtonDouble tempBtn;
+            tempBtn.self = null;
+            tempBtn.shift = null;
+            bool flagBreak = false;
+            string str;
+            foreach (DockPanel dock in ButtonSet.Children)
+            {
+                foreach (Button btn in dock.Children)
+                {
+                    str = btn.Name.ToString().Split('_')[0];
+                    if (e.Key.ToString() == btn.Name.ToString() ||
+                        e.Key.ToString() + "_shift" == btn.Name.ToString())
+                    {
+                        if (!btn.Name.ToString().Contains("shift"))
+                        {
+                            tempBtn.self = btn;
+                        }
+                        else
+                        {
+                            tempBtn.shift = btn;
+                        }
+                        if (tempBtn.self != null && tempBtn.shift != null)
+                        {
+                            flagBreak = true;
+                            break;
+                        }
+                    }
+                }
+                if (flagBreak)
+                {
+                    break;
+                }
+            }
+            return tempBtn;
         }
 
         private Button GetButton(KeyEventArgs e)
@@ -77,66 +100,65 @@ namespace KeyboardSimulator
         private void Switch_Big()
         {
             Dock1.Visibility = Visibility.Hidden;
-            Dock11.Visibility = Visibility.Visible;
+            Dock1_shift.Visibility = Visibility.Visible;
             Dock2.Visibility = Visibility.Hidden;
-            Dock22.Visibility = Visibility.Visible;
+            Dock2_shift.Visibility = Visibility.Visible;
             Dock3.Visibility = Visibility.Hidden;
-            Dock33.Visibility = Visibility.Visible;
+            Dock3_shift.Visibility = Visibility.Visible;
         }
         private void Switch_Big_Shift()
         {
             Dock0.Visibility = Visibility.Hidden;
-            Dock00.Visibility = Visibility.Visible;
+            Dock0_shift.Visibility = Visibility.Visible;
             Dock1.Visibility = Visibility.Hidden;
-            Dock11.Visibility = Visibility.Visible;
+            Dock1_shift.Visibility = Visibility.Visible;
             Dock2.Visibility = Visibility.Hidden;
-            Dock22.Visibility = Visibility.Visible;
+            Dock2_shift.Visibility = Visibility.Visible;
             Dock3.Visibility = Visibility.Hidden;
-            Dock33.Visibility = Visibility.Visible;
+            Dock3_shift.Visibility = Visibility.Visible;
         }
         private void Switch_Big_Shift_Digit_Small()
         {
-            Dock00.Visibility = Visibility.Hidden;
+            Dock0_shift.Visibility = Visibility.Hidden;
             Dock0.Visibility = Visibility.Visible;
             Dock1.Visibility = Visibility.Hidden;
-            Dock11.Visibility = Visibility.Visible;
+            Dock1_shift.Visibility = Visibility.Visible;
             Dock2.Visibility = Visibility.Hidden;
-            Dock22.Visibility = Visibility.Visible;
+            Dock2_shift.Visibility = Visibility.Visible;
             Dock3.Visibility = Visibility.Hidden;
-            Dock33.Visibility = Visibility.Visible;
+            Dock3_shift.Visibility = Visibility.Visible;
         }
         private void Switch_Small()
         {
-            Dock11.Visibility = Visibility.Hidden;
+            Dock1_shift.Visibility = Visibility.Hidden;
             Dock1.Visibility = Visibility.Visible;
-            Dock22.Visibility = Visibility.Hidden;
+            Dock2_shift.Visibility = Visibility.Hidden;
             Dock2.Visibility = Visibility.Visible;
-            Dock33.Visibility = Visibility.Hidden;
+            Dock3_shift.Visibility = Visibility.Hidden;
             Dock3.Visibility = Visibility.Visible;
         }
         private void Switch_Small_Shift()
         {
-            Dock00.Visibility = Visibility.Hidden;
+            Dock0_shift.Visibility = Visibility.Hidden;
             Dock0.Visibility = Visibility.Visible;
-            Dock11.Visibility = Visibility.Hidden;
+            Dock1_shift.Visibility = Visibility.Hidden;
             Dock1.Visibility = Visibility.Visible;
-            Dock22.Visibility = Visibility.Hidden;
+            Dock2_shift.Visibility = Visibility.Hidden;
             Dock2.Visibility = Visibility.Visible;
-            Dock33.Visibility = Visibility.Hidden;
+            Dock3_shift.Visibility = Visibility.Hidden;
             Dock3.Visibility = Visibility.Visible;
         }
         private void Switch_Small_Shift_Digit_Big()
         {
             Dock0.Visibility = Visibility.Hidden;
-            Dock00.Visibility = Visibility.Visible;
-            Dock11.Visibility = Visibility.Hidden;
+            Dock0_shift.Visibility = Visibility.Visible;
+            Dock1_shift.Visibility = Visibility.Hidden;
             Dock1.Visibility = Visibility.Visible;
-            Dock22.Visibility = Visibility.Hidden;
+            Dock2_shift.Visibility = Visibility.Hidden;
             Dock2.Visibility = Visibility.Visible;
-            Dock33.Visibility = Visibility.Hidden;
+            Dock3_shift.Visibility = Visibility.Hidden;
             Dock3.Visibility = Visibility.Visible;
         }
-
         private void Switch_Case()
         {
             // если включен CapsLock
@@ -151,8 +173,8 @@ namespace KeyboardSimulator
                     // переключаем регистр кнопок цифрового ряда
                     //if (Dock0.Visibility == Visibility.Visible)
                     //{
-                        Dock0.Visibility = Visibility.Hidden;
-                        Dock00.Visibility = Visibility.Visible;
+                    Dock0.Visibility = Visibility.Hidden;
+                    Dock0_shift.Visibility = Visibility.Visible;
                     //}
                     //else
                     //{
@@ -176,8 +198,8 @@ namespace KeyboardSimulator
                     //}
                     //else
                     //{
-                        Dock00.Visibility = Visibility.Hidden;
-                        Dock0.Visibility = Visibility.Visible;
+                    Dock0_shift.Visibility = Visibility.Hidden;
+                    Dock0.Visibility = Visibility.Visible;
                     //}
                     Switch_Big();
                 }
@@ -225,10 +247,11 @@ namespace KeyboardSimulator
         }
         private void WritePanel_KeyUp(object sender, KeyEventArgs e)
         {
-            Button tempButton = GetButton(e);
-            if (tempButton != null) 
+            ButtonDouble tempButton = GetButtons(e);
+            if (tempButton.self != null && tempButton.shift != null)
             {
-                tempButton.Background = tempButton.BorderBrush;
+                tempButton.self.Background = tempButton.self.BorderBrush;
+                tempButton.shift.Background = tempButton.shift.BorderBrush;
                 // если включен CapsLock
                 if (Keyboard.IsKeyToggled(Key.CapsLock))
                 {
@@ -255,11 +278,13 @@ namespace KeyboardSimulator
                     }
                 }
             }
-            tempButton = null;
+            tempButton.self = null;
+            tempButton.shift = null;
         }
+
         private void WritePanel_TextInpt(object sender, TextCompositionEventArgs e)
         {
-            WritePanel.Text += e.Text;   
+            WritePanel.Text += e.Text;
         }
     }
 }
