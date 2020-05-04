@@ -113,12 +113,16 @@
         <DockPanel x:Name="StartPanel" Grid.Row="1" LastChildFill="False">
             <Button x:Name="btnStop" Content="Стоп" DockPanel.Dock="Right"
                     Margin="5,5,5,5" Width="200" FontSize="16"
-                    Template="{StaticResource btTemplate}"/>
+                    Template="{StaticResource btTemplate}"
+                    Click="btnStop_Click"/>
             <Button x:Name="btnStart" Content="Старт" DockPanel.Dock="Right"
                     Margin="5,5,5,5" Width="200" FontSize="16"
-                    Template="{StaticResource btTemplate}"/>
+                    Template="{StaticResource btTemplate}"
+                    Click="btnStart_Click"/>
         </DockPanel>
         <DockPanel Grid.Row="2" MaxHeight="100">
+            <TextBox x:Name="ReadPanel"  Background="#FF609B38" FontSize="16"
+                       TextWrapping="Wrap" Width="375" />
             <TextBox x:Name="WritePanel"  Background="Lavender" FontSize="16"
                        TextWrapping="Wrap" Focusable="True" AcceptsReturn="True" AcceptsTab="True"
                        KeyDown="WritePanel_KeyDown"
