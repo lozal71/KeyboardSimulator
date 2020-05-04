@@ -7,9 +7,23 @@
         mc:Ignorable="d"
         Title="Клавиатурный тренажер" MaxHeight="550" MaxWidth="770" MinHeight="550" MinWidth="770">
     <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="btTemplate">
+            <Border CornerRadius="8"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}"
+                    Height="{TemplateBinding Height}"
+                    Width="{TemplateBinding Width}"
+                    IsEnabled="{TemplateBinding IsEnabled}">
+                <ContentControl HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+            </Border>
+        </ControlTemplate>
         <Style x:Key="BaseStyle">
             <Setter Property="ItemsControl.FontSize" Value="16"/>
             <Setter Property="ItemsControl.VerticalAlignment" Value="Center"/>
+
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label" BasedOn="{StaticResource BaseStyle}">
         </Style>
@@ -25,26 +39,32 @@
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="40"/>
             <Setter Property="Margin" Value="3"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Template" Value="{StaticResource btTemplate}"/>
         </Style>
         <Style x:Key="RedButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Background" Value="Red"/>
-            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="Background" Value="#FFE46659"/>
+            <Setter Property="BorderBrush" Value="#FFE46659"/>
         </Style>
         <Style x:Key="YellowButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Background" Value="Yellow"/>
-            <Setter Property="BorderBrush" Value="Yellow"/>
+            <Setter Property="Background" Value="#FFDEA84A"/>
+            <Setter Property="BorderBrush" Value="#FFDEA84A"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
         <Style x:Key="GreenButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Background" Value="Green"/>
-            <Setter Property="BorderBrush" Value="Green"/>
+            <Setter Property="Background" Value="#FF609B38"/>
+            <Setter Property="BorderBrush" Value="#FF609B38"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
         <Style x:Key="BlueButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Background" Value="Blue"/>
-            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="Background" Value="#FF38809B"/>
+            <Setter Property="BorderBrush" Value="#FF38809B"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
         <Style x:Key="PurpleButtton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
-            <Setter Property="Background" Value="Purple"/>
-            <Setter Property="BorderBrush" Value="Purple"/>
+            <Setter Property="Background" Value="#FF8A61AC"/>
+            <Setter Property="BorderBrush" Value="#FF8A61AC"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
         <Style x:Key="GrayButtton" TargetType="Button" >
             <Setter Property="Background" Value="Gray"/>
@@ -52,6 +72,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="Margin" Value="3"/>
+            <Setter Property="Template" Value="{StaticResource btTemplate}"/>
         </Style>
         <Style x:Key="SpaceButtton" TargetType="Button" >
             <Setter Property="Background" Value="Orange"/>
@@ -59,6 +80,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderBrush" Value="Orange"/>
             <Setter Property="Margin" Value="3"/>
+            <Setter Property="Template" Value="{StaticResource btTemplate}"/>
         </Style>
     </Window.Resources>
     <Grid x:Name="BaseGrid" ShowGridLines="True" 
@@ -90,9 +112,11 @@
         </DockPanel>
         <DockPanel x:Name="StartPanel" Grid.Row="1" LastChildFill="False">
             <Button x:Name="btnStop" Content="Стоп" DockPanel.Dock="Right"
-                    Margin="5,5,5,5" Width="200" FontSize="16"/>
+                    Margin="5,5,5,5" Width="200" FontSize="16"
+                    Template="{StaticResource btTemplate}"/>
             <Button x:Name="btnStart" Content="Старт" DockPanel.Dock="Right"
-                    Margin="5,5,5,5" Width="200" FontSize="16"/>
+                    Margin="5,5,5,5" Width="200" FontSize="16"
+                    Template="{StaticResource btTemplate}"/>
         </DockPanel>
         <DockPanel Grid.Row="2" MaxHeight="100">
             <TextBox x:Name="WritePanel"  Background="Lavender" FontSize="16"
@@ -339,25 +363,25 @@
             </DockPanel>
             <DockPanel x:Name="Dock4" Grid.Row="4" LastChildFill="True">
                 <Button x:Name="LeftCtrl" Content="Ctrl"  DockPanel.Dock="Left" 
-                        Width="57" Height="40" IsEnabled="False"
+                        Width="57" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="LWin" Content="Win"  DockPanel.Dock="Left" 
-                        Width="80" Height="40" IsEnabled="False"
+                        Width="80" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="LeftAlt" Content="Alt"  DockPanel.Dock="Left" 
-                        Width="80" Height="40" IsEnabled="False"
+                        Width="80" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="RightCtrl" Content="Ctrl"  DockPanel.Dock="Right" 
-                        Width="57" Height="40" IsEnabled="False"
+                        Width="57" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="Apps" Content="Apps"  DockPanel.Dock="Right" 
-                        Width="57" Height="40" IsEnabled="False"
+                        Width="57" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="RWin" Content="Win"  DockPanel.Dock="Right" 
-                        Width="80" Height="40" IsEnabled="False"
+                        Width="80" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="RightAlt" Content="Alt"  DockPanel.Dock="Right" 
-                        Width="80" Height="40" IsEnabled="False"
+                        Width="80" Height="40" 
                         Style="{StaticResource GrayButtton}"/>
                 <Button x:Name="Space" Content="Space" 
                         Style="{StaticResource SpaceButtton}"/>

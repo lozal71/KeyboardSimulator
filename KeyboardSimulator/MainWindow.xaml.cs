@@ -213,10 +213,15 @@ namespace KeyboardSimulator
             // если кнопка определилась
             if (tempButton != null)
             {
-                // меняем цвет фона на белый
-                if (e.Key.ToString() != "Capital")
+                // если это не кнопка CapsLock
+                if (e.Key.ToString() != "Capital" &&
+                    !e.Key.ToString().Contains("Ctrl") && 
+                    !e.Key.ToString().Contains("Win") &&
+                    !e.Key.ToString().Contains("Alt"))
                 {
+                    // меняем цвет фона на белый
                     tempButton.Background = Brushes.White;
+                    //tempButton.Opacity = 0.8;
                 }
                 // если включен CapsLock
                 if (Keyboard.IsKeyToggled(Key.CapsLock))
