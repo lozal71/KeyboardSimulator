@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.Threading;
+using System.Security.Cryptography.X509Certificates;
 
 namespace KeyboardSimulator
 {
@@ -27,6 +30,11 @@ namespace KeyboardSimulator
         }
 
         public bool flagStart;
+        public bool flagError;
+        public Stopwatch stopWatch;
+        public TimeSpan ts;
+        public int symbolsCounter;
+        public int errCounter;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +46,7 @@ namespace KeyboardSimulator
             btnStart.Opacity = 1.0;
             btnStop.IsEnabled = false;
             btnStop.Opacity = 0.5;
+            stopWatch = new Stopwatch();
         }
         private ButtonDouble GetButtons(KeyEventArgs e)
         {
@@ -222,16 +231,6 @@ namespace KeyboardSimulator
                 // если кнопка определилась
                 if (tempButton != null)
                 {
-                    // если это не кнопка CapsLock
-                    if (e.Key.ToString() != "Capital" &&
-                        !e.Key.ToString().Contains("Ctrl") &&
-                        !e.Key.ToString().Contains("Win") &&
-                        !e.Key.ToString().Contains("Alt"))
-                    {
-                        // меняем цвет фона на белый
-                        tempButton.Background = Brushes.White;
-                        //tempButton.Opacity = 0.8;
-                    }
                     // если включен CapsLock
                     if (Keyboard.IsKeyToggled(Key.CapsLock))
                     {
@@ -257,6 +256,16 @@ namespace KeyboardSimulator
                             Switch_Small_Shift(); // регистр всех кнопок - нижний
                         }
                     }
+                    // если это не кнопка CapsLock
+                    if (e.Key.ToString() != "Capital" &&
+                        !e.Key.ToString().Contains("Ctrl") &&
+                        !e.Key.ToString().Contains("Win") &&
+                        !e.Key.ToString().Contains("Alt"))
+                    {
+                        // меняем цвет фона на белый
+                        tempButton.Background = Brushes.White;
+                    }
+
                 }
             }
         }
@@ -267,8 +276,6 @@ namespace KeyboardSimulator
                 ButtonDouble tempButton = GetButtons(e);
                 if (tempButton.self != null && tempButton.shift != null)
                 {
-                    tempButton.self.Background = tempButton.self.BorderBrush;
-                    tempButton.shift.Background = tempButton.shift.BorderBrush;
                     // если включен CapsLock
                     if (Keyboard.IsKeyToggled(Key.CapsLock))
                     {
@@ -294,33 +301,83 @@ namespace KeyboardSimulator
                             Switch_Big_Shift(); // регистр всех кнопок - верхний
                         }
                     }
+                    // возвращаем цвет фона
+                    tempButton.self.Background = tempButton.self.BorderBrush;
+                    tempButton.shift.Background = tempButton.shift.BorderBrush;
                 }
                 tempButton.self = null;
                 tempButton.shift = null;
             }
         }
 
-        private void WritePanel_TextInpt(object sender, TextCompositionEventArgs e)
+        private void WritePanel_PreviwTextInput(object sender, TextCompositionEventArgs e)
         {
             if (flagStart)
             {
-                WritePanel.Text += e.Text;
+                //x = ReadPanel.Text[symbolsCounter];
+                //y = e.Text[0];
+                if (ReadPanel.Text.Length > symbolsCounter)
+                {
+                    if (ReadPanel.Text[symbolsCounter] != e.Text[0])
+                    {
+                        WritePanel.Foreground = Brushes.Orange;
+                        //WritePanel.FontStyle = FontStyles.Italic;
+                        errCounter++;
+                    }
+                    else
+                    {
+                        WritePanel.Foreground = Brushes.Black;
+                        //WritePanel.FontStyle = FontStyles.Normal;
+                    }
+                    symbolsCounter++;
+                }
+                else
+                {
+                    btnStop.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                }
+
             }
         }
 
+        private void WritePanel_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (ReadPanel.Text.Length > symbolsCounter)
+            {
+                if (e.Key == Key.Space && ReadPanel.Text[symbolsCounter] != ' ')
+                {
+                    WritePanel.Foreground = Brushes.Orange;
+                    symbolsCounter++;
+                    errCounter++;
+                }
+                else if (e.Key == Key.Space && ReadPanel.Text[symbolsCounter] == ' ')
+                {
+                    WritePanel.Foreground = Brushes.Black;
+                    symbolsCounter++;
+                }
+            }
+            else
+            {
+                btnStop.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
+        }
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             flagStart = true;
-            ReadPanel.Text = "I love you";
+            WritePanel.Text = "";
+            ReadPanel.Text = "I love you I love you I love you I love you I love you I love you";
             btnStart.IsEnabled = false;
             btnStart.Opacity = 0.5;
             btnStop.IsEnabled = true;
             btnStop.Opacity = 1.0;
             WritePanel.IsEnabled = true;
             WritePanel.Focus();
+            stopWatch.Start();
+            symbolsCounter = 0;
+            errCounter = 0;
         }
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
+            int totalTime;
             flagStart = false;
             btnStart.IsEnabled = true;
             btnStart.Opacity = 1.0;
@@ -328,6 +385,18 @@ namespace KeyboardSimulator
             btnStop.Opacity = 0.5;
             WritePanel.IsEnabled = false;
             WritePanel.Focus();
+            stopWatch.Stop();
+            ts = stopWatch.Elapsed;
+            Fails.Text = errCounter.ToString();
+            totalTime = ts.Hours * 60 + ts.Minutes;
+            if (totalTime != 0)
+            {
+                Speed.Text = ((int)symbolsCounter / totalTime).ToString();
+            }
+            else
+            {
+                Speed.Text = symbolsCounter.ToString();
+            }
         }
     }
 }

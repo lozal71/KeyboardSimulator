@@ -15,9 +15,9 @@
                     Height="{TemplateBinding Height}"
                     Width="{TemplateBinding Width}"
                     IsEnabled="{TemplateBinding IsEnabled}">
-                <ContentControl HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Content="{TemplateBinding Content}" />
+                    <ContentControl HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding Content}" />
             </Border>
         </ControlTemplate>
         <Style x:Key="BaseStyle">
@@ -27,7 +27,7 @@
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label" BasedOn="{StaticResource BaseStyle}">
         </Style>
-        <Style x:Key="TextStyleBold" TargetType="TextBlock" BasedOn="{StaticResource BaseStyle}">
+        <Style x:Key="TextStyleBold" TargetType="TextBox" BasedOn="{StaticResource BaseStyle}">
             <Setter Property="TextBlock.FontWeight" Value="Bold"/>
         </Style>
         <Style x:Key="btnBaseStyle" TargetType="Button"
@@ -94,17 +94,17 @@
         <DockPanel x:Name="TopPanel" LastChildFill="True" >
             <Label Content="Скорость" HorizontalAlignment="Right" 
                    Style="{StaticResource LabelStyle}"/>
-            <TextBlock x:Name="Speed" Text="0" HorizontalAlignment="Center"
-                        Style="{StaticResource TextStyleBold}"/>
+            <TextBox x:Name="Speed" Text="0" HorizontalAlignment="Center"
+                    Style="{StaticResource TextStyleBold}"/>
             <Label Content="символов/мин" HorizontalAlignment="Left" 
                     Style="{StaticResource LabelStyle}"/>
             <Label Content="Ошибок" HorizontalAlignment="Right"
                     Style="{StaticResource LabelStyle}"/>
-            <TextBlock x:Name="Fails" Text="0" HorizontalAlignment="Center"
+            <TextBox x:Name="Fails" Text="0" HorizontalAlignment="Center"
                             Style="{StaticResource TextStyleBold}"/>
             <CheckBox Content="Регистр" DockPanel.Dock="Right" Margin="20,0,20,0"
                       Style="{StaticResource BaseStyle}"/>
-            <TextBlock x:Name="Difficulty" Text="0" DockPanel.Dock="Right"
+            <TextBox x:Name="Difficulty" Text="0" DockPanel.Dock="Right"
                     HorizontalAlignment="Center"
                     Style="{StaticResource TextStyleBold}"/>
             <Label Content="Сложность" HorizontalAlignment="Right" 
@@ -121,13 +121,15 @@
                     Click="btnStart_Click"/>
         </DockPanel>
         <DockPanel Grid.Row="2" MaxHeight="100">
-            <TextBox x:Name="ReadPanel"  Background="#FF609B38" FontSize="16"
+            <TextBox x:Name="ReadPanel"  Background="#FF609B38" FontSize="20"
+                     Foreground="White"
                        TextWrapping="Wrap" Width="375" />
-            <TextBox x:Name="WritePanel"  Background="Lavender" FontSize="16"
+            <TextBox x:Name="WritePanel"  Background="Lavender" FontSize="20"
                        TextWrapping="Wrap" Focusable="True" AcceptsReturn="True" AcceptsTab="True"
                        KeyDown="WritePanel_KeyDown"
                        KeyUp="WritePanel_KeyUp"
-                       TextInput="WritePanel_TextInpt"/>
+                       PreviewKeyDown ="WritePanel_PreviewKeyDown"
+                       PreviewTextInput="WritePanel_PreviwTextInput"/>
         </DockPanel>
         <Grid x:Name="ButtonSet"  Grid.Row="3" ShowGridLines="True">
             <Grid.RowDefinitions>
