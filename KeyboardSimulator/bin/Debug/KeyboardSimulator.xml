@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KeyboardSimulator</name>
+    </assembly>
+    <members>
+        <member name="T:KeyboardSimulator.App">
+            <summary>
+            Логика взаимодействия для App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:KeyboardSimulator.MainWindow">
+            <summary>
+            Логика взаимодействия для MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="T:KeyboardSimulator.MainWindow.ButtonDouble">
+            <summary>
+            составная кнопка нижнего и верхнего регистров
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.ButtonDouble.self">
+            <summary>
+             кнопка нижнего регистра
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.ButtonDouble.shift">
+            <summary>
+            кнопка верхнего регистра
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.flagStart">
+            <summary>
+            признак нажатия на кнопку "Старт"
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.flagBack">
+            <summary>
+            признак нажатия на клавишу клавиатуры Backspace
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.stopWatch">
+            <summary>
+             счетчик времени работы тренажера
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.symbolsCounter">
+            <summary>
+            счетчик введенных символов
+            </summary>
+        </member>
+        <member name="F:KeyboardSimulator.MainWindow.errCounter">
+            <summary>
+            счетчик ошибок
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.#ctor">
+            <summary>
+            начальная инициализация
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.GetButtons(System.Windows.Input.KeyEventArgs)">
+            <summary>
+            определяет какие кнопки соответствуют нажатой клавише на клавиатуре
+            </summary>
+            <param name="e"> объект события нажатия клавиши на клавиатуре </param>
+            <returns> возвращает кнопки нижнего и верхнего регистра </returns>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.Letters_Big_Symbols">
+            <summary>
+            параметры видимости dock - панелей установливаются так,
+            чтобы буквенные ряды были видны в верхнем регистре,
+            в цифровом ряду были видны символы
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.Letters_Big_Digit">
+            <summary>
+            параметры видимости dock - панелей установливаются так,
+            чтобы буквенные ряды были видны в верхнем регистре,
+            в цифровом ряду были видны цифры
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.Letters_Small_Digit">
+            <summary>
+            параметры видимости dock - панелей установливаются так,
+            чтобы буквенные ряды были видны в нижнем регистре,
+            в цифровом ряду были видны цифры
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.Letters_Small_Symbols">
+            <summary>
+            параметры видимости dock - панелей установливаются так,
+            чтобы буквенные ряды были видны в верхнем регистре,
+            в цифровом ряду были видны символы
+            </summary>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.WritePanel_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            обработка события KeyDown дла панели ввода WritePanel
+            для отслеживания нажатия на клавиши CapsLock и Shift
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.WritePanel_KeyUp(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            обработка события KeyUp для панели ввода WritePanel
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.WritePanel_PreviwTextInput(System.Object,System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            обработка события PreviwTextInput для панели ввода WritePanel
+            для определения правильности ввода и подсчета введенных символов
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.WritePanel_PreviewKeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            обработка события PreviewKeyDown для панели ввода WritePanel
+            для отслеживания нажатия клавиш "Space" и "Backspace"
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.btnStart_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            обработка события нажатия на кнопку "Старт"
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.btnStop_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            обработка события нажатия на кнопку "Стоп"
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:KeyboardSimulator.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:KeyboardSimulator.Properties.Resources">
+            <summary>
+              Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+            </summary>
+        </member>
+        <member name="P:KeyboardSimulator.Properties.Resources.ResourceManager">
+            <summary>
+              Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+            </summary>
+        </member>
+        <member name="P:KeyboardSimulator.Properties.Resources.Culture">
+            <summary>
+              Переопределяет свойство CurrentUICulture текущего потока для всех
+              подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+            </summary>
+        </member>
+    </members>
+</doc>
